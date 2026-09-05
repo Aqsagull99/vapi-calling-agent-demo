@@ -29,6 +29,12 @@ export const SUGGESTIONS = [
   'Can I get in on Thursday afternoon?',
 ]
 
-export const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY ?? ''
-export const VAPI_ASSISTANT_ID = import.meta.env.VITE_VAPI_ASSISTANT_ID ?? ''
+/**
+ * Trimmed on purpose. A stray space pasted into a hosting provider's
+ * environment-variable field becomes `Bearer  <key>` in the auth header, and
+ * Vapi answers `400 failed to extract key` — which surfaces in the browser as
+ * an unhelpful "Failed to fetch". Cost an afternoon once; never again.
+ */
+export const VAPI_PUBLIC_KEY = (import.meta.env.VITE_VAPI_PUBLIC_KEY ?? '').trim()
+export const VAPI_ASSISTANT_ID = (import.meta.env.VITE_VAPI_ASSISTANT_ID ?? '').trim()
 export const IS_CONFIGURED = Boolean(VAPI_PUBLIC_KEY && VAPI_ASSISTANT_ID)
