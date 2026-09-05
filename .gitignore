@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.local
+.DS_Store
+
+# Vapi private key must NEVER live in this repo
+.vapi-key
+*.key
