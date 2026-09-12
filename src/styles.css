@@ -528,7 +528,7 @@ code {
   max-width: 82%;
   animation: rise 0.32s var(--ease) both;
 }
-.turn.from-caller { margin-left: auto; flex-direction: row-reverse; }
+.turn.from-caller { margin-inline-start: auto; flex-direction: row-reverse; }
 
 @keyframes rise {
   from { opacity: 0; transform: translateY(9px); }
@@ -573,9 +573,9 @@ code {
   background: var(--surface-2);
   border: 1px solid var(--border);
 }
-.turn.from-agent .turn-text { border-top-left-radius: 4px; }
+.turn.from-agent .turn-text { border-start-start-radius: 4px; }
 .turn.from-caller .turn-text {
-  border-top-right-radius: 4px;
+  border-start-end-radius: 4px;
   background: rgba(94, 234, 212, 0.09);
   border-color: rgba(94, 234, 212, 0.2);
 }
@@ -648,7 +648,7 @@ code {
   margin: 0;
   font-size: 13.5px;
   font-weight: 500;
-  text-align: right;
+  text-align: end;
   color: var(--text-faint);
   min-width: 0;
   overflow-wrap: anywhere;
@@ -865,7 +865,7 @@ code {
   gap: 7px;
   font-size: 11.5px;
   line-height: 1.55;
-  text-align: left;
+  text-align: start;
   color: var(--text-dim);
 }
 .mic-check-result > svg { flex: none; margin-top: 2px; }
@@ -878,7 +878,7 @@ code {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  text-align: left;
+  text-align: start;
 }
 .mic-picker span {
   font-size: 10px;
@@ -896,3 +896,36 @@ code {
   font: inherit;
   font-size: 12.5px;
 }
+
+/* ---------- Arabic / RTL ---------- */
+[dir='rtl'] body {
+  font-family: 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif;
+}
+/* Instrument Serif has no Arabic glyphs — the wordmark falls back to the UI face. */
+[dir='rtl'] .brand-name,
+[dir='rtl'] .agent-id h2 {
+  font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif;
+  font-weight: 600;
+}
+[dir='rtl'] .agent-id h2 { font-size: 21px; }
+[dir='rtl'] .brand-name { font-size: 18px; }
+/* Arabic numerals and Latin identifiers stay left-to-right inside RTL text. */
+[dir='rtl'] .call-timer,
+[dir='rtl'] .confirmation span,
+[dir='rtl'] .history-sub {
+  direction: ltr;
+  text-align: end;
+  unicode-bidi: isolate;
+}
+[dir='rtl'] .eyebrow,
+[dir='rtl'] .suggestions-label,
+[dir='rtl'] .panel-head h3,
+[dir='rtl'] .turn-who,
+[dir='rtl'] .booking-status,
+[dir='rtl'] .live-tag,
+[dir='rtl'] .hero-stats dd {
+  letter-spacing: 0;
+  text-transform: none;
+}
+[dir='rtl'] .hero h1 { line-height: 1.35; }
+[dir='rtl'] .turn-text { line-height: 1.8; }

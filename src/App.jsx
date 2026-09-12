@@ -1,4 +1,4 @@
-import { IS_CONFIGURED } from './config'
+import { IS_CONFIGURED, T } from './config'
 import { useVapiCall } from './lib/useVapiCall'
 import TopBar from './components/TopBar'
 import Hero from './components/Hero'
@@ -55,8 +55,8 @@ export default function App() {
         </main>
 
         <footer className="site-foot">
-          <span>Voice orchestration by Vapi · Speech by Deepgram · Voice by ElevenLabs</span>
-          <span>Demo build — no patient data is stored.</span>
+          <span>{T.footerStack}</span>
+          <span>{T.footerNote}</span>
         </footer>
       </div>
     </div>

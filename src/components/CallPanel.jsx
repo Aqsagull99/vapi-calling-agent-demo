@@ -1,4 +1,4 @@
-import { BRAND, SUGGESTIONS } from '../config'
+import { BRAND, SUGGESTIONS, T } from '../config'
 import { CALL_STATUS } from '../lib/useVapiCall'
 import { formatDuration } from '../lib/history'
 import { PhoneIcon, HangUpIcon, MicIcon, MicOffIcon, StarIcon } from './Icons'
@@ -9,13 +9,13 @@ const BAR_COUNT = 14
 function statusLabel(status, agentSpeaking) {
   switch (status) {
     case CALL_STATUS.CONNECTING:
-      return 'Connecting…'
+      return T.connecting
     case CALL_STATUS.ENDING:
-      return 'Wrapping up…'
+      return T.wrappingUp
     case CALL_STATUS.ACTIVE:
-      return agentSpeaking ? `${BRAND.agentName} is speaking` : 'Listening…'
+      return agentSpeaking ? `${BRAND.agentName} ${T.speaking}` : T.listening
     default:
-      return 'Ready to take your call'
+      return T.ready
   }
 }
 
@@ -73,7 +73,7 @@ export default function CallPanel({
         {idle ? (
           <button className="btn btn-call" onClick={onStart} disabled={disabled}>
             <PhoneIcon width={19} height={19} />
-            Talk to {BRAND.agentName}
+            {T.talkTo} {BRAND.agentName}
           </button>
         ) : (
           <button
@@ -82,7 +82,7 @@ export default function CallPanel({
             disabled={status === CALL_STATUS.ENDING}
           >
             <HangUpIcon width={19} height={19} />
-            End call
+            {T.endCall}
           </button>
         )}
 
@@ -94,7 +94,7 @@ export default function CallPanel({
           title={muted ? 'Unmute microphone' : 'Mute microphone'}
         >
           {muted ? <MicOffIcon width={17} height={17} /> : <MicIcon width={17} height={17} />}
-          {muted ? 'Muted' : 'Mute'}
+          {muted ? T.muted : T.mute}
         </button>
       </div>
 
@@ -108,7 +108,7 @@ export default function CallPanel({
 
       {idle && (
         <div className="suggestions">
-          <span className="suggestions-label">Try saying</span>
+          <span className="suggestions-label">{T.trySaying}</span>
           {SUGGESTIONS.map((line) => (
             <span key={line} className="suggestion">“{line}”</span>
           ))}

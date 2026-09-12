@@ -1,3 +1,4 @@
+import { T } from '../config'
 import { formatClock, formatDuration } from '../lib/history'
 import { CheckIcon, PhoneIcon, TrashIcon } from './Icons'
 
@@ -5,17 +6,17 @@ export default function CallHistory({ history, onClear }) {
   return (
     <section className="panel history-panel">
       <header className="panel-head">
-        <h3>Recent calls</h3>
+        <h3>{T.recentCalls}</h3>
         {history.length > 0 && (
           <button className="link-btn" onClick={onClear} title="Clear the demo log">
             <TrashIcon width={13} height={13} />
-            Clear
+            {T.clear}
           </button>
         )}
       </header>
 
       {history.length === 0 ? (
-        <p className="history-empty">No calls yet. Completed calls are logged here.</p>
+        <p className="history-empty">{T.noCalls}</p>
       ) : (
         <ul className="history-list">
           {history.map((entry) => {
@@ -27,12 +28,12 @@ export default function CallHistory({ history, onClear }) {
                 </span>
                 <div className="history-body">
                   <span className="history-title">
-                    {entry.patient || 'Unidentified caller'}
+                    {entry.patient || T.unknownCaller}
                     {entry.service ? ` · ${entry.service}` : ''}
                   </span>
                   <span className="history-sub">
                     {formatClock(entry.startedAt)} · {formatDuration(entry.seconds)} ·{' '}
-                    {booked ? entry.slot || 'Booked' : 'No booking'}
+                    {booked ? entry.slot || T.confirmed : T.noBooking}
                   </span>
                 </div>
               </li>

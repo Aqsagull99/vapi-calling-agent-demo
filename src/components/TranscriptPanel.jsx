@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { BRAND } from '../config'
+import { BRAND, T } from '../config'
 import { CALL_STATUS } from '../lib/useVapiCall'
 import { WaveIcon } from './Icons'
 
@@ -11,7 +11,7 @@ function Bubble({ role, text, live }) {
         {isAgent ? '✦' : 'You'}
       </span>
       <div className="turn-body">
-        <span className="turn-who">{isAgent ? BRAND.agentName : 'Caller'}</span>
+        <span className="turn-who">{isAgent ? BRAND.agentName : T.caller}</span>
         <p className="turn-text">
           {text}
           {live && <span className="caret" aria-hidden="true" />}
@@ -35,10 +35,10 @@ export default function TranscriptPanel({ turns, liveTurn, status }) {
   return (
     <section className="panel transcript-panel">
       <header className="panel-head">
-        <h3>Live transcript</h3>
+        <h3>{T.liveTranscript}</h3>
         <span className={`live-tag ${live ? 'is-live' : ''}`}>
           <span className="live-dot" aria-hidden="true" />
-          {live ? 'Live' : 'Idle'}
+          {live ? T.live : T.idle}
         </span>
       </header>
 
@@ -46,8 +46,8 @@ export default function TranscriptPanel({ turns, liveTurn, status }) {
         {empty ? (
           <div className="transcript-empty">
             <WaveIcon width={26} height={26} />
-            <p>The conversation appears here, word by word, as it happens.</p>
-            <span>Press “Talk to {BRAND.agentName}” to begin.</span>
+            <p>{T.transcriptEmpty}</p>
+            <span>{T.transcriptHint}</span>
           </div>
         ) : (
           <ul className="turns">
@@ -60,9 +60,9 @@ export default function TranscriptPanel({ turns, liveTurn, status }) {
       </div>
 
       <footer className="panel-foot">
-        <span>{turns.length} turns</span>
+        <span>{turns.length} {T.turns}</span>
         <span className="dot-sep" aria-hidden="true">•</span>
-        <span>Transcribed in real time by Deepgram via Vapi</span>
+        <span>{T.transcribedBy}</span>
       </footer>
     </section>
   )

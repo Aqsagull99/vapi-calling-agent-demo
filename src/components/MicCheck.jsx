@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { T } from '../config'
 import { MicIcon, AlertIcon, CheckIcon } from './Icons'
 
 const TEST_MS = 7000
@@ -123,9 +124,9 @@ export default function MicCheck() {
     <div className="mic-check">
       {devices.length > 1 && state !== 'testing' && (
         <label className="mic-picker">
-          <span>Input device</span>
+          <span>{T.inputDevice}</span>
           <select value={deviceId} onChange={(e) => setDeviceId(e.target.value)}>
-            <option value="">System default</option>
+            <option value="">{T.systemDefault}</option>
             {devices.map((d, i) => (
               <option key={d.deviceId} value={d.deviceId}>
                 {d.label || `Microphone ${i + 1}`}
@@ -140,19 +141,19 @@ export default function MicCheck() {
           <div className="mic-check-bar" aria-hidden="true">
             <span style={{ width: `${pct}%` }} />
           </div>
-          <p className="mic-check-hint">Say something — “testing, one two three”…</p>
+          <p className="mic-check-hint">{T.micSaySomething}</p>
         </>
       ) : (
         <button className="btn btn-ghost mic-check-btn" onClick={run}>
           <MicIcon width={15} height={15} />
-          {state === 'idle' ? 'Test my microphone' : 'Test again'}
+          {state === 'idle' ? T.testMic : T.testAgain}
         </button>
       )}
 
       {state === 'ok' && (
         <p className="mic-check-result is-ok">
           <CheckIcon width={13} height={13} />
-          Microphone works{device ? ` — ${device}` : ''}
+          {T.micWorks}{device ? ` — ${device}` : ''}
         </p>
       )}
       {state === 'silent' && (

@@ -1,4 +1,4 @@
-import { BRAND } from '../config'
+import { BRAND, T } from '../config'
 import { StarIcon, PhoneIcon } from './Icons'
 
 export default function TopBar({ status }) {
@@ -22,7 +22,7 @@ export default function TopBar({ status }) {
         </span>
         <span className={`status-pill ${online ? 'is-live' : ''}`}>
           <span className="status-dot" aria-hidden="true" />
-          {online ? 'Agent on a call' : 'Agent available'}
+          {online ? T.agentOnCall : T.agentAvailable}
         </span>
       </div>
     </header>

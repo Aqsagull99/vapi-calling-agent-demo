@@ -1,19 +1,14 @@
+import { T } from '../config'
 import { CheckIcon, CalendarIcon } from './Icons'
 
-const FIELDS = [
-  { key: 'patient', label: 'Patient', placeholder: 'Awaiting name' },
-  { key: 'phone', label: 'Callback', placeholder: 'Awaiting number' },
-  { key: 'service', label: 'Reason for visit', placeholder: 'Awaiting reason' },
-  { key: 'date', label: 'Date', placeholder: 'Not set' },
-  { key: 'time', label: 'Time', placeholder: 'Not set' },
-  { key: 'insurance', label: 'Insurance', placeholder: 'Not provided' },
-  { key: 'newPatient', label: 'Patient type', placeholder: 'Unknown' },
-]
+const FIELDS = ['patient', 'phone', 'service', 'date', 'time', 'insurance', 'newPatient'].map(
+  (key) => ({ key, label: T.fields[key][0], placeholder: T.fields[key][1] }),
+)
 
 const STATUS_COPY = {
-  idle: { label: 'Awaiting call', className: '' },
-  collecting: { label: 'Collecting details', className: 'is-collecting' },
-  confirmed: { label: 'Confirmed', className: 'is-confirmed' },
+  idle: { label: T.awaitingCall, className: '' },
+  collecting: { label: T.collecting, className: 'is-collecting' },
+  confirmed: { label: T.confirmed, className: 'is-confirmed' },
 }
 
 export default function AppointmentCard({ appointment, flashFields }) {
@@ -25,7 +20,7 @@ export default function AppointmentCard({ appointment, flashFields }) {
       <header className="panel-head">
         <h3>
           <CalendarIcon width={15} height={15} />
-          Appointment
+          {T.appointment}
         </h3>
         <span className={`booking-status ${meta.className}`}>
           {confirmed && <CheckIcon width={13} height={13} />}
@@ -56,8 +51,8 @@ export default function AppointmentCard({ appointment, flashFields }) {
         <div className="confirmation">
           <CheckIcon width={16} height={16} />
           <div>
-            <strong>Booked &amp; written to the schedule</strong>
-            <span>Confirmation {appointment.confirmation}</span>
+            <strong>{T.booked}</strong>
+            <span>{T.confirmation} {appointment.confirmation}</span>
           </div>
         </div>
       )}
